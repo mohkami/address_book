@@ -1,0 +1,4 @@
+node_modules
+
+# this file includes the credentials and configs
+config.js
