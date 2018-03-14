@@ -4,6 +4,18 @@ import {ListGroup, ListGroupItem} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import './NavBar.css'
 import SearchInput from 'react-search-input'
+import { connect } from "react-redux";
+import { fetchContacts } from "../actions"
+
+const mapStateToProps = state => {
+  return { contacts: state.allContacts };
+};
+
+const mapDispatchToProps = dispatch => {
+  return { 
+    fetchContacts: searchTerm => dispatch(fetchContacts(searchTerm))
+  };
+};
 
 class NavBar extends Component {
   constructor (props) {
@@ -15,6 +27,7 @@ class NavBar extends Component {
   }
 
   searchUpdated (term) {
+    this.props.fetchContacts(term)
     this.setState({searchTerm: term})
   }
 
@@ -28,21 +41,19 @@ class NavBar extends Component {
         <SearchInput throttle={500} className="search-input" onChange={this.searchUpdated} />
         </div>
         <ListGroup>
-          <LinkContainer to="/1">
-            <ListGroupItem bsClass="list-group-item">
-              Contact 1
-            </ListGroupItem>
-          </LinkContainer>
-
-          <LinkContainer to="/2">
-            <ListGroupItem bsClass="list-group-item">
-              Contact 2
-            </ListGroupItem>
-          </LinkContainer>
+        {
+          this.props.contacts.map(contact => (
+            <LinkContainer key={contact} to="/1">
+              <ListGroupItem bsClass="list-group-item">
+                {contact}
+              </ListGroupItem>
+            </LinkContainer>
+          ))
+        }
         </ListGroup>
       </div>
     );
   }
 }
 
-export default NavBar
+export default connect(mapStateToProps, mapDispatchToProps)(NavBar)

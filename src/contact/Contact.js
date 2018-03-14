@@ -1,4 +1,10 @@
 import React, { Component } from 'react';
+import { connect } from "react-redux";
+import { fetchContacts } from "../actions"
+
+const mapStateToProps = state => {
+  return { contacts: state.allContacts };
+};
 
 class Contact extends Component {
 
@@ -6,6 +12,12 @@ class Contact extends Component {
     super(props);
     this.renderNoContactSelected = this.renderNoContactSelected.bind(this);
     this.renderSpecificContact = this.renderSpecificContact.bind(this);
+
+    this.handleSubmit = this.handleSubmit.bind(this);
+  }
+
+  handleSubmit(event) {
+    event.preventDefault();
   }
 
   render() {
@@ -15,7 +27,7 @@ class Contact extends Component {
   renderNoContactSelected() {
     return (
       <div>
-        Please select a contact from the left menue
+        Please select a contact from the left menue.
       </div>
     )
   }
@@ -29,4 +41,4 @@ class Contact extends Component {
   }
 }
 
-export default Contact;
+export default connect(mapStateToProps)(Contact)

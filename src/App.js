@@ -4,7 +4,7 @@ import NavBar from './navbar/NavBar';
 import Contact from './contact/Contact';
 import {Row, Col} from 'react-bootstrap'
 import {Route} from 'react-router-dom'
-
+import reduxStore from './store' 
 
 class App extends Component {
   render() {
