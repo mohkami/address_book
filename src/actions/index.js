@@ -4,7 +4,7 @@ import ContactsAPI from "../api/contacts"
 export function fetchContacts(searchTerm='') {  
     return function(dispatch) {
         return ContactsAPI.searchContacts(searchTerm).then(response => {
-            dispatch(loadContacts(response.contacts));
+            dispatch(loadContacts(response.data.contacts));
         }).catch(error => {
             throw(error);
         });

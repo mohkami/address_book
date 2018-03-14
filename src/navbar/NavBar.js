@@ -5,7 +5,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 import './NavBar.css'
 import SearchInput from 'react-search-input'
 import { connect } from "react-redux";
-import { fetchContacts } from "../actions"
+import { fetchContacts, selectContact } from "../actions"
 
 const mapStateToProps = state => {
   return { contacts: state.allContacts };
@@ -13,7 +13,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return { 
-    fetchContacts: searchTerm => dispatch(fetchContacts(searchTerm))
+    fetchContacts: searchTerm => dispatch(fetchContacts(searchTerm)),
+    selectContact: contact => dispatch(selectContact(contact))
   };
 };
 
@@ -43,9 +44,9 @@ class NavBar extends Component {
         <ListGroup>
         {
           this.props.contacts.map(contact => (
-            <LinkContainer key={contact} to="/1">
+            <LinkContainer key={contact.firstName} to={"/" + contact.contactId}>
               <ListGroupItem bsClass="list-group-item">
-                {contact}
+              {contact.lastName}, {contact.firstName}
               </ListGroupItem>
             </LinkContainer>
           ))
