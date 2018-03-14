@@ -5,7 +5,7 @@ import {LinkContainer} from 'react-router-bootstrap'
 import './NavBar.css'
 import SearchInput from 'react-search-input'
 import { connect } from "react-redux";
-import { fetchContacts, selectContact } from "../actions"
+import { fetchContacts } from "../actions"
 
 const mapStateToProps = state => {
   return { contacts: state.allContacts };
@@ -13,8 +13,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return { 
-    fetchContacts: searchTerm => dispatch(fetchContacts(searchTerm)),
-    selectContact: contact => dispatch(selectContact(contact))
+    fetchContacts: searchTerm => dispatch(fetchContacts(searchTerm))
   };
 };
 
