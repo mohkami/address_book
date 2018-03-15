@@ -59,12 +59,24 @@ const Query = new GraphQLObjectType({
     name: 'Query',
     fields: () => {
         return {
+            contact: {
+                type: Contact,
+                args: {
+                    id: {
+                        type: GraphQLInt
+                    }
+                },
+                resolve(root, args) {
+                    return Db.models.contact
+                    .findById(args.id) 
+                }
+            },
             contacts: {
                 type: new GraphQLList(Contact),
                 args: {
                     keyword: {
                         type: GraphQLString
-                    },
+                    }
                 },
                 resolve(root, args) {
                     if (args.keyword) {
@@ -75,15 +87,6 @@ const Query = new GraphQLObjectType({
                                 },
                                 lastName: {
                                   $like: '%' + args.keyword + '%'
-                                },
-                                phone: {
-                                  $like: '%' + args.keyword + '%'
-                                },
-                                email: {
-                                  $like: '%' + args.keyword + '%'
-                                },
-                                address: {
-                                  $like: '%' + args.keyword + '%'
                                 }
                               }
                          } 
@@ -92,7 +95,8 @@ const Query = new GraphQLObjectType({
                         query = {}
                     }
 
-                    return Db.models.contact.findAll({ where: query});
+                    return Db.models.contact
+                    .findAll({ where: query});
                 }
             }
         }
@@ -106,6 +110,9 @@ const Mutation = new GraphQLObjectType({
             editContact: {
                 type: Contact,
                 args: {
+                    contactId: {
+                        type: GraphQLInt
+                    },
                     firstName: {
                         type: GraphQLString
                     },
@@ -114,9 +121,10 @@ const Mutation = new GraphQLObjectType({
                     }
                 },
                 resolve(_, args) {
-                    return Db.models.person.create({
-                        firstName: args.firstName,
-                        lastName: args.lastName,
+                    return Db.models.contact
+                    .findById(args.contactId)
+                    .then((contact) => {
+                      return contact.update({ firstName: args.firstName, lastName: args.lastName});
                     });
                 }
             }

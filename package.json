@@ -4,6 +4,7 @@
   "description": "",
   "main": "demo.js",
   "dependencies": {
+    "cors": "^2.8.4",
     "express": "^4.16.2",
     "express-graphql": "^0.6.12",
     "faker": "^4.1.0",
