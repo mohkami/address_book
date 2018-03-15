@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectContact, editContact } from '../../actions'
+import { Form, Text, Fieldset, Field } from "react-form";
 
 const mapStateToProps = state => {
   return { 
@@ -32,7 +33,8 @@ class MainViewComponent extends Component {
   bindListeners() {
     this.goToEditMode = this.goToEditMode.bind(this)
     this.cancelEditMode = this.cancelEditMode.bind(this)
-    this.submitEdit = this.submitEdit.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleInputChange = this.handleInputChange.bind(this)
   }
 
   componentDidMount () {
@@ -48,6 +50,7 @@ class MainViewComponent extends Component {
       this.cancelEditMode()
       this.setContactToPopulate(contactId)
     }
+    this.setState({selectedContact: nextProps.selectedContact})
   }
 
   setContactToPopulate(contactId) {
@@ -63,23 +66,39 @@ class MainViewComponent extends Component {
     this.setState({editMode: false})
   }
 
-  submitEdit() {
+  handleSubmit(editedContact) {
     this.cancelEditMode()
-    const newContactInfo = {
-      contactId: this.props.selectedContact.contactId,
-      firstName: "workin",
-      lastName: "werkin",
-    }
-    
-    this.props.submitEdit(this.props.selectedContact.contactId, newContactInfo)
+    this.props.submitEdit(this.props.selectedContact.contactId, editedContact)
+  }
+
+  handleInputChange(event) {
+    const target = event.target;
+    const value = target.value;
+    const name = target.name;
+
+    this.setState({
+      [name]: value
+    });
   }
 
   render() {
     const editMode = this.state.editMode
-    return this.props.selectedContact ? this.renderContact(editMode) : this.renderNoContactSelected(editMode) 
+
+    // Default: Empty state
+    let template = this.buildEmptyStateTemplate()
+
+    // Edit mode 
+    if (this.props.selectedContact && editMode) {
+      template = this.buildEditModeTemplate()
+    }
+    // Read-only mode 
+    else if (this.props.selectedContact) {
+      template = this.buildReadOnlyModeTemplate()
+    }
+    return template
   }
 
-  renderNoContactSelected(editMode) {
+  buildEmptyStateTemplate() {
     return (
       <div>
         Please select a contact from the left menue.
@@ -87,23 +106,30 @@ class MainViewComponent extends Component {
     )
   }
 
-  renderContact(editMode) {
+  buildEditModeTemplate() {
+    const initialValue = {firstName:"Mohsen"}
+    return (
+      <Form onSubmit={this.handleSubmit} defaultValues={this.props.selectedContact}>
+        {formApi => (
+          <form onSubmit={formApi.submitForm} id="form2">
+            <label htmlFor="firstName">First name</label>
+            <Text field="firstName" id="firstName" />
+
+            <label htmlFor="lastName">Last name</label>
+            <Text field="lastName" id="lastName" />
+
+            <button type="submit">Submit</button>
+          </form>
+        )}
+      </Form>
+    )
+  }
+  
+  buildReadOnlyModeTemplate() {
     return (
       <div>
-        {editMode &&
-        <h2>
-          In Edit Mode
-        </h2>
-        }
         This is the contact view for : {this.props.selectedContact.contactId} : {this.props.selectedContact.firstName} , {this.props.selectedContact.lastName}
-        {editMode ? 
-          (<div>
-            <button onClick={this.cancelEditMode}> Cancel </button>
-            <button onClick={this.submitEdit}> Submit </button>
-          </div>)
-          :
-          (<button onClick={this.goToEditMode}> Edit </button>)
-        }
+        <button onClick={this.goToEditMode}> Edit </button>
       </div>
     )
   }
