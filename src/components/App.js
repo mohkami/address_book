@@ -1,24 +1,23 @@
-import React, { Component } from 'react';
-import './App.css';
-import NavBar from './navbar/NavBar';
-import Contact from './contact/Contact';
+import React, { Component } from 'react'
 import {Row, Col} from 'react-bootstrap'
 import {Route} from 'react-router-dom'
-import reduxStore from './store' 
+import NavBarComponent from './navbar/NavBar'
+import MainViewComponent from './main_view/MainView'
+import './App.css'
 
 class App extends Component {
   render() {
     return (
     <Row className="main-container">
       <Col className="navbar-col" xs={3} md={3}>
-        <NavBar />
+        <Route path="/:id?" component={NavBarComponent}/>
       </Col>
       <Col className="contact-col" xs={9} md={9}>
-        <Route path="/:id?" component={Contact}/>
+        <Route path="/:id?" component={MainViewComponent}/>
       </Col>
     </Row>
     );
   }
 }
 
-export default App;
+export default App
