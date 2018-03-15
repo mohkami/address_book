@@ -10,7 +10,10 @@ class ContactsAPI {
                 contacts{
                     contactId,
                     firstName,
-                    lastName
+                    lastName,
+                    address,
+                    email,
+                    phone
                 }
             }
             `,
@@ -24,7 +27,10 @@ class ContactsAPI {
                 contacts(keyword: $searchTerm){
                     contactId,
                     firstName,
-                    lastName
+                    lastName,
+                    address,
+                    email,
+                    phone
                 }
             }
             `,
@@ -41,7 +47,10 @@ class ContactsAPI {
                 contact(id: $contactId){
                     contactId,
                     firstName,
-                    lastName
+                    lastName,
+                    address,
+                    email,
+                    phone
                 }
             }
             `,
@@ -51,21 +60,41 @@ class ContactsAPI {
           }
     }
 
-    static buildUpdateContactByIdQuery(contactId, firstName, lastName) {
+    static buildUpdateContactByIdQuery(contact) {
         return {
             mutation: gql`
-                mutation ($contactId: Int, $firstName: String, $lastName: String) {
-                    editContact(contactId: $contactId,firstName: $firstName,lastName: $lastName){
+                mutation (
+                    $contactId: Int,
+                    $firstName: String,
+                    $lastName: String,
+                    $address: String,
+                    $email: String,
+                    $phone: String) {
+
+                    editContact(
+                        contactId: $contactId,
+                        firstName: $firstName,
+                        lastName: $lastName,
+                        address: $address,
+                        email: $email,
+                        phone: $phone
+                        ){
                         contactId,
                         firstName,
-                        lastName
+                        lastName,
+                        address,
+                        email,
+                        phone
                     }
                 }
             `,
             variables: { 
-                contactId: contactId,
-                firstName: firstName,
-                lastName: lastName
+                contactId: contact.contactId,
+                firstName: contact.firstName,
+                lastName: contact.lastName,
+                address: contact.address,
+                email: contact.email,
+                phone: contact.phone
             }
           }
     }
@@ -86,12 +115,14 @@ class ContactsAPI {
     static getContactById(contactId) {
         const query = ContactsAPI.buildGetContactByIdQuery(contactId)
         return graphQLClient.query(query)
-        .then(data => data)
+        .then(data => {
+            return data
+        })
         .catch(error => console.error(error))
     }
     
-    static updateContactById(contactId, firstName, lastName) {
-        const query = ContactsAPI.buildUpdateContactByIdQuery(contactId, firstName, lastName)
+    static updateContactById(contact) {
+        const query = ContactsAPI.buildUpdateContactByIdQuery(contact)
         return graphQLClient.mutate(query)
         .then(data => data)
         .catch(error => console.error(error))

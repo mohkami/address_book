@@ -35,9 +35,9 @@ export function selectContact(contactId) {
 }
 
 // Exported action creator to indicate the result of edit on a contact by id
-export function editContact(contactId, newContactInfo){
+export function editContact(newContactInfo){
     return function(dispatch) {
-        return ContactsAPI.updateContactById(contactId, newContactInfo.firstName, newContactInfo.lastName).then(response => {
+        return ContactsAPI.updateContactById(newContactInfo).then(response => {
             dispatch(editContactSuccessful(response.data.editContact))
         }).catch(error => {
             throw(error)

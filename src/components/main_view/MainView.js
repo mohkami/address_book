@@ -11,7 +11,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    submitEdit: (contactId, contact) => dispatch(editContact(contact.contactId, contact)),
+    submitEdit: (contact) => dispatch(editContact(contact)),
     loadSelectedContact: (contactId) => dispatch(selectContact(contactId))
   }
 }
@@ -68,7 +68,7 @@ class MainViewComponent extends Component {
 
   handleSubmit(editedContact) {
     this.cancelEditMode()
-    this.props.submitEdit(this.props.selectedContact.contactId, editedContact)
+    this.props.submitEdit(editedContact)
   }
 
   handleInputChange(event) {
@@ -107,19 +107,34 @@ class MainViewComponent extends Component {
   }
 
   buildEditModeTemplate() {
-    const initialValue = {firstName:"Mohsen"}
     return (
       <Form onSubmit={this.handleSubmit} defaultValues={this.props.selectedContact}>
         {formApi => (
-          <form onSubmit={formApi.submitForm} id="form2">
-            <label htmlFor="firstName">First name</label>
-            <Text field="firstName" id="firstName" />
-
-            <label htmlFor="lastName">Last name</label>
-            <Text field="lastName" id="lastName" />
-
-            <button type="submit">Submit</button>
-          </form>
+            <form onSubmit={formApi.submitForm} id="form2">
+                <div>
+                    <label htmlFor="firstName">First name</label>
+                    <Text field="firstName" id="firstName" />
+                </div>
+                <div>
+                    <label htmlFor="lastName">Last name</label>
+                    <Text field="lastName" id="lastName" />
+                </div>
+                <div>
+                    <label htmlFor="address">address</label>
+                    <Text field="address" id="address" />
+                </div>
+                <div>
+                    <label htmlFor="email">email</label>
+                    <Text field="email" id="email" />
+                </div>
+                <div>
+                    <label htmlFor="phone">phone</label>
+                    <Text field="phone" id="phone" />
+                </div>
+                <div>
+                    <button type="submit">Submit</button>
+                </div>
+            </form>
         )}
       </Form>
     )
@@ -128,7 +143,26 @@ class MainViewComponent extends Component {
   buildReadOnlyModeTemplate() {
     return (
       <div>
-        This is the contact view for : {this.props.selectedContact.contactId} : {this.props.selectedContact.firstName} , {this.props.selectedContact.lastName}
+        This is the contact view for :
+        <div>
+            ID: {this.props.selectedContact.contactId}
+        </div>
+        <div>
+            firstName: {this.props.selectedContact.firstName}
+        </div>
+        <div>
+            lastName: {this.props.selectedContact.lastName}
+        </div>
+        <div>
+            address: {this.props.selectedContact.address}
+        </div>
+        <div>
+            email: {this.props.selectedContact.email}
+        </div>
+        <div>
+            phone: {this.props.selectedContact.phone}
+        </div>
+
         <button onClick={this.goToEditMode}> Edit </button>
       </div>
     )
