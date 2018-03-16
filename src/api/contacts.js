@@ -100,30 +100,33 @@ class ContactsAPI {
     }
 
     static getAllContacts() {
-        return graphQLClient.query(ContactsAPI.buildGetAllContactsQuery())
-        .then(data => data)
-        .catch(error => console.error(error))
+        const query = ContactsAPI.buildGetAllContactsQuery()
+        return ContactsAPI.queryGraphql(query)
     }
 
     static searchContacts(searchTerm) {
         const query = ContactsAPI.buildSearchContactsQuery(searchTerm)
-        return graphQLClient.query(query)
-        .then(data => data)
-        .catch(error => console.error(error))
+        return ContactsAPI.queryGraphql(query)
     }
     
     static getContactById(contactId) {
         const query = ContactsAPI.buildGetContactByIdQuery(contactId)
-        return graphQLClient.query(query)
-        .then(data => data)
-        .catch(error => console.error(error))
+        return ContactsAPI.queryGraphql(query)
     }
     
     static updateContactById(contact) {
         const query = ContactsAPI.buildUpdateContactByIdQuery(contact)
+        return ContactsAPI.mutateGraphql(query)
+    }
+
+    static queryGraphql(query) {
+        return graphQLClient.query(query)
+        .then(data => data)
+    }
+
+    static mutateGraphql(query) {
         return graphQLClient.mutate(query)
         .then(data => data)
-        .catch(error => console.error(error))
     }
 }
 

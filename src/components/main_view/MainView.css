@@ -1,8 +1,11 @@
+.main-view-container {
+  margin: 15px;
+}
+
 .edit-button-container {
   display: flex;
   justify-content: space-between;
   justify-content: flex-end;
-  padding: 15px;
 }
 
 .contact-header {

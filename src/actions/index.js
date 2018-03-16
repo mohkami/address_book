@@ -4,10 +4,10 @@ import ContactsAPI from '../api/contacts'
 // Exported action creator to load all contacts
 export function loadAllContacts() {
     return function(dispatch) {
-        return ContactsAPI.getAllContacts().then(response => {
+        ContactsAPI.getAllContacts().then(response => {
             dispatch(loadContactsSuccessful(response.data.contacts))
         }).catch(error => {
-            throw(error)
+            dispatch(loadContactsFailed())
         })
     }
 }
@@ -15,10 +15,10 @@ export function loadAllContacts() {
 // Exported action creator to search and load contacts using a search term
 export function searchContacts(searchTerm='') {
     return function(dispatch) {
-        return ContactsAPI.searchContacts(searchTerm).then(response => {
+        ContactsAPI.searchContacts(searchTerm).then(response => {
             dispatch(loadContactsSuccessful(response.data.contacts))
         }).catch(error => {
-            throw(error)
+            dispatch(loadContactsFailed())            
         })
     }
 }
@@ -26,10 +26,10 @@ export function searchContacts(searchTerm='') {
 // Exported action creator to select a contact by id
 export function selectContact(contactId) {
     return function(dispatch) {
-        return ContactsAPI.getContactById(contactId).then(response => {
-            dispatch(loadContact(response.data.contact))
+        ContactsAPI.getContactById(contactId).then(response => {
+            dispatch(loadContactSuccessful(response.data.contact))
         }).catch(error => {
-            throw(error)
+            dispatch(loadContactFailed())
         })
     }
 }
@@ -37,10 +37,10 @@ export function selectContact(contactId) {
 // Exported action creator to indicate the result of edit on a contact by id
 export function editContact(newContactInfo){
     return function(dispatch) {
-        return ContactsAPI.updateContactById(newContactInfo).then(response => {
+        ContactsAPI.updateContactById(newContactInfo).then(response => {
             dispatch(editContactSuccessful(response.data.editContact))
         }).catch(error => {
-            throw(error)
+            dispatch(editContactFailed())
         })
     }
 }
@@ -49,16 +49,42 @@ export function loadContactsSuccessful(contacts) {
     return {
         type: constants.LOAD_CONTACTS,
         payload: {
-            contacts: contacts
+            contacts: contacts,
+            successful: true,
+            errorMessage: ""
         }
     }
 }
 
-export function loadContact(contact){
+export function loadContactsFailed() {
+    return {
+        type: constants.LOAD_CONTACTS,
+        payload: {
+            contacts: [],
+            successful: false,
+            errorMessage: "Failed to load contacts. Please try again."
+        }
+    }
+}
+
+export function loadContactSuccessful(contact){
     return {
         type: constants.LOAD_CONTACT,
         payload: {
-            contact: contact
+            contact: contact,
+            successful: true,
+            errorMessage: ""
+        }
+    }
+}
+
+export function loadContactFailed(contact){
+    return {
+        type: constants.LOAD_CONTACT,
+        payload: {
+            contact: null,
+            successful: false,
+            errorMessage: "Failed to load contact. Please try again."
         }
     }
 }
@@ -67,7 +93,20 @@ export function editContactSuccessful(contact) {
     return {
         type: constants.EDIT_CONTACT,
         payload: {
-            contact: contact
+            contact: contact,
+            successful: true,
+            errorMessage: ""
+        }
+    }
+}
+
+export function editContactFailed() {
+    return {
+        type: constants.EDIT_CONTACT,
+        payload: {
+            contact: null,
+            successful: false,
+            errorMessage: "Failed to edit contact. Please try again."
         }
     }
 }

@@ -3,7 +3,7 @@ import {connect} from 'react-redux'
 
 const mapStateToProps = state => {
   return {
-    selectedContact: state.selectedContact
+    selectedContact: state.loadedSelectedContact.contact
   }
 }
 
@@ -20,7 +20,7 @@ class ListItem extends Component {
   componentWillReceiveProps(nextProps){
     let selectedContact = nextProps.selectedContact
 
-    if (selectedContact.contactId === this.state.contact.contactId) {
+    if (selectedContact && selectedContact.contactId === this.state.contact.contactId) {
       this.setState({contact: selectedContact})
     }
   }

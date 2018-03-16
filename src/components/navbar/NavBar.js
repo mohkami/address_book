@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import {ListGroup, ListGroupItem} from 'react-bootstrap'
+import {ListGroup, ListGroupItem, Alert} from 'react-bootstrap'
 import {LinkContainer} from 'react-router-bootstrap'
 import './NavBar.css'
 import SearchInput from 'react-search-input'
@@ -9,7 +9,9 @@ import ListItemComponent from './ListItem'
 
 const mapStateToProps = state => {
   return {
-    contacts: state.allContacts
+    contacts: state.loadedContacts.contacts,
+    loadSuccessful: state.loadedContacts.successful,
+    failErrorMessage: state.loadedContacts.errorMessage
   }
 }
 
@@ -55,6 +57,11 @@ export class NavBar extends Component {
   render() {
     return (
       <div>
+        {!this.props.loadSuccessful &&
+        (<Alert className="error-alert" bsStyle="danger">
+          {this.props.failErrorMessage}
+        </Alert>)
+        }
         <div className="navbar-title">
           All Contacts
         </div>

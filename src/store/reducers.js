@@ -1,28 +1,40 @@
 import constants from '../constansts'
 import { combineReducers }  from 'redux'
 
+const defaultLoadedContactsState = {
+    contacts: [],
+    successful: true,
+    errorMessage: ""
+}
 
-export const allContacts = (state=[], action) => {
+export const loadedContacts = (state=defaultLoadedContactsState, action) => {
+    
     switch(action.type) {
         case constants.LOAD_CONTACTS:
-            return action.payload.contacts
+            return action.payload
         default:
             return state
     }
 }
 
-export const selectedContact = (state=null, action) => {
+const defaultLoadedSelectedContactState = {
+    contact: null,
+    successful: true,
+    errorMessage: ""
+}
+
+export const loadedSelectedContact = (state=defaultLoadedSelectedContactState, action) => {
     switch(action.type) {
         case constants.LOAD_CONTACT:
-            return action.payload.contact
+            return action.payload
         case constants.EDIT_CONTACT:
-            return action.payload.contact
+            return action.payload
         default:
             return state
     }
 }
 
 export default combineReducers({
-    allContacts,
-    selectedContact
+    loadedContacts,
+    loadedSelectedContact
 })

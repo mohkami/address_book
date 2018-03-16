@@ -2,12 +2,14 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectContact, editContact } from '../../actions'
 import { Form, Text, Fieldset, Field, TextArea } from "react-form";
-import {Row, Col} from 'react-bootstrap'
+import {Row, Col, Alert} from 'react-bootstrap'
 import './MainView.css'
 
 const mapStateToProps = state => {
   return { 
-    selectedContact: state.selectedContact
+    selectedContact: state.loadedSelectedContact.contact,
+    loadSuccessful: state.loadedSelectedContact.successful,
+    failErrorMessage: state.loadedSelectedContact.errorMessage,
   }
 }
 
@@ -83,6 +85,11 @@ class MainViewComponent extends Component {
   }
 
   render() {
+
+    if(!this.props.loadSuccessful) {
+      return this.buildErrorAlertTemplate(this.props.failErrorMessage);
+    }
+
     const editMode = this.state.editMode
 
     // Default: Empty state
@@ -99,9 +106,17 @@ class MainViewComponent extends Component {
     return template
   }
 
+  buildErrorAlertTemplate(errorMessage) {
+    return (
+      <Alert className="main-view-container" bsStyle="danger">
+        {errorMessage}
+      </Alert>
+    )
+  }
+
   buildEmptyStateTemplate() {
     return (
-      <div>
+      <div className="main-view-container">
         Please select a contact from the left menue.
       </div>
     )
@@ -115,7 +130,7 @@ class MainViewComponent extends Component {
     const rigtCol = 11 - leftCol
 
     return (
-      <div>
+      <div className="main-view-container">
         <div className="contact-header">
           Edit Contact
         </div>
@@ -182,7 +197,7 @@ class MainViewComponent extends Component {
     const rigtCol = 11 - leftCol
 
     return (
-      <div>
+      <div className="main-view-container">
         <div className="edit-button-container">
           <button onClick={this.goToEditMode}> Edit </button>
         </div>
