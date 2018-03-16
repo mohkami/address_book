@@ -4,7 +4,7 @@
 
 ## The diagram for MainView (Right-hand side section): Successfully Loaded Selected Contact to Main View
 
-![alt text](https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgTWFpblZpZXcgKFJpZ2h0LWhhbmQgc2lkZSBzZWN0aW9uKTogRW1wdHkAJQUgACYFU3RhdGUgKFdoZW4gbm8gY29udGFjdCBpcyBzZWxlY3RlZCkKCgBQCUNvbXBvbmVudChOYXZCYXIuanMpLT4AAh06MS5pZiBubyBpZCBpbiBwYXJhbXMAFD4yLnJlbmRlciBlAIFIBXMAgT4FdGVtcGxhdGUK&s=default)
+![alt text](https://www.websequencediagrams.com/cgi-bin/cdraw?lz=dGl0bGUgTWFpblZpZXcgKFJpZ2h0LWhhbmQgc2lkZSBzZWN0aW9uKTogU3VjY2Vzc2Z1bGx5IExvYWRlZCBTZWxlY3RlZCBDb250YWN0IHRvAEcFIFZpZXcKCgBOCUNvbXBvbmVudCgAYgguanMpLT4AAh86MS5pZiBpZCBpbiBwYXJhbXMAMSJBAIErBXMoYQACBi9pbmRleABIBTIubG9hZACBKwgAgSsHKGMAgTQGSWQpCgAiGS0-U2VydmVyOjIuZ2V0AIFlB0J5SWQAMgwAHQYAZRwzLgCCPQcvUmVzcG9uc2UAVxxSZWR1Y2VycyhzdG9yZS9yAAgHAIITBTQAgUYFAIJuBwCDDwoAgUUIKQoAIhstAIJVIjUuAIIPByBsAINjBQCDB0I2LmRpc3BsYXkgAIJpBw&s=default)
 
 
 ## The diagram for MainView (Right-hand side section): Failed to Load Selected Contact to Main View
