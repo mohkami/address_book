@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class MainViewComponent extends Component {
+class MainView extends Component {
   constructor(props) {
     super(props);
     this.initializeState()
@@ -37,6 +37,7 @@ class MainViewComponent extends Component {
     this.goToEditMode = this.goToEditMode.bind(this)
     this.cancelEditMode = this.cancelEditMode.bind(this)
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.handleCancelForm = this.handleCancelForm.bind(this)
     this.handleInputChange = this.handleInputChange.bind(this)
   }
 
@@ -72,6 +73,11 @@ class MainViewComponent extends Component {
   handleSubmit(editedContact) {
     this.cancelEditMode()
     this.props.submitEdit(editedContact)
+  }
+
+  handleCancelForm(event) {
+    event.preventDefault()
+    this.cancelEditMode()
   }
 
   handleInputChange(event) {
@@ -180,6 +186,7 @@ class MainViewComponent extends Component {
                   </Row>
                 </div>
                 <div>
+                    <button onClick={this.handleCancelForm}>Cancel</button>
                     <button type="submit">Submit</button>
                 </div>
             </form>
@@ -233,4 +240,4 @@ class MainViewComponent extends Component {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MainViewComponent)
+export default connect(mapStateToProps, mapDispatchToProps)(MainView)
