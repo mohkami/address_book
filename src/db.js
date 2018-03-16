@@ -20,12 +20,7 @@ const Contact = Conn.define('contact', {
     lastName: Sequelize.STRING,
     address: Sequelize.STRING,
     phone: Sequelize.STRING,
-    email: {
-        type: Sequelize.STRING,
-        validate: {
-            isEmail: true
-        }
-    }
+    email: Sequelize.STRING
 });
 
 Conn.sync({force: true}).then(()=>{

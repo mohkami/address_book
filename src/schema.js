@@ -118,13 +118,23 @@ const Mutation = new GraphQLObjectType({
                     },
                     lastName: {
                         type: GraphQLString
+                    },
+                    address: {
+                        type: GraphQLString
+                    },
+                    email: {
+                        type: GraphQLString
+                    },
+                    phone: {
+                        type: GraphQLString
                     }
                 },
                 resolve(_, args) {
                     return Db.models.contact
                     .findById(args.contactId)
                     .then((contact) => {
-                      return contact.update({ firstName: args.firstName, lastName: args.lastName});
+                      return contact.update({ firstName: args.firstName, lastName: args.lastName ,address: args.address ,email: args.email ,phone: args.phone
+                    });
                     });
                 }
             }
