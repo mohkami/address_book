@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { selectContact, editContact } from '../../actions'
-import { Form, Text, Fieldset, Field } from "react-form";
+import { Form, Text, Fieldset, Field, TextArea } from "react-form";
+import {Row, Col} from 'react-bootstrap'
+import './MainView.css'
 
 const mapStateToProps = state => {
   return { 
@@ -17,7 +19,6 @@ const mapDispatchToProps = dispatch => {
 }
 
 class MainViewComponent extends Component {
-
   constructor(props) {
     super(props);
     this.initializeState()
@@ -107,63 +108,111 @@ class MainViewComponent extends Component {
   }
 
   buildEditModeTemplate() {
+    const xsLeftCol = 3
+    const xsRigtCol = 11 - xsLeftCol
+
+    const leftCol = 2
+    const rigtCol = 11 - leftCol
+
     return (
-      <Form onSubmit={this.handleSubmit} defaultValues={this.props.selectedContact}>
-        {formApi => (
-            <form onSubmit={formApi.submitForm} id="form2">
+      <div>
+        <div className="contact-header">
+          Edit Contact
+        </div>
+        <Form onSubmit={this.handleSubmit} defaultValues={this.props.selectedContact}>
+          {formApi => (
+              <form onSubmit={formApi.submitForm} id="editContactForm">
                 <div>
-                    <label htmlFor="firstName">First name</label>
-                    <Text field="firstName" id="firstName" />
-                </div>
-                <div>
-                    <label htmlFor="lastName">Last name</label>
-                    <Text field="lastName" id="lastName" />
-                </div>
-                <div>
-                    <label htmlFor="address">address</label>
-                    <Text field="address" id="address" />
-                </div>
-                <div>
-                    <label htmlFor="email">email</label>
-                    <Text field="email" id="email" />
-                </div>
-                <div>
-                    <label htmlFor="phone">phone</label>
-                    <Text field="phone" id="phone" />
+                  <Row>
+                    <Col xs={xsLeftCol} md={leftCol}>
+                      First Name:
+                    </Col>
+                    <Col xs={xsRigtCol} md={rigtCol}>
+                      <Text field="firstName" id="firstName" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={xsLeftCol} md={leftCol}>
+                      Last Name:
+                    </Col>
+                    <Col xs={xsRigtCol} md={rigtCol}>
+                      <Text field="lastName" id="lastName" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={xsLeftCol} md={leftCol}>
+                      Phone:
+                    </Col>
+                    <Col xs={xsRigtCol} md={rigtCol}>
+                      <Text field="phone" id="phone" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={xsLeftCol} md={leftCol}>
+                      Email:
+                    </Col>
+                    <Col xs={xsRigtCol} md={rigtCol}>
+                      <Text field="email" id="email" />
+                    </Col>
+                  </Row>
+                  <Row>
+                    <Col xs={xsLeftCol} md={leftCol}>
+                      Address:
+                    </Col>
+                    <Col xs={xsRigtCol} md={rigtCol}>
+                      <TextArea field="address" id="address" />
+                    </Col>
+                  </Row>
                 </div>
                 <div>
                     <button type="submit">Submit</button>
                 </div>
             </form>
         )}
-      </Form>
+        </Form>
+      </div>
     )
   }
   
   buildReadOnlyModeTemplate() {
+    const xsLeftCol = 3
+    const xsRigtCol = 11 - xsLeftCol
+
+    const leftCol = 2
+    const rigtCol = 11 - leftCol
+
     return (
       <div>
-        This is the contact view for :
-        <div>
-            ID: {this.props.selectedContact.contactId}
+        <div className="edit-button-container">
+          <button onClick={this.goToEditMode}> Edit </button>
         </div>
-        <div>
-            firstName: {this.props.selectedContact.firstName}
+        <div className="contact-header">
+          {this.props.selectedContact.firstName} {this.props.selectedContact.lastName}
         </div>
-        <div>
-            lastName: {this.props.selectedContact.lastName}
-        </div>
-        <div>
-            address: {this.props.selectedContact.address}
-        </div>
-        <div>
-            email: {this.props.selectedContact.email}
-        </div>
-        <div>
-            phone: {this.props.selectedContact.phone}
-        </div>
-
-        <button onClick={this.goToEditMode}> Edit </button>
+        <Row>
+          <Col xs={xsLeftCol} md={leftCol}>
+            Phone:
+          </Col>
+          <Col xs={xsRigtCol} md={rigtCol}>
+            {this.props.selectedContact.phone}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={xsLeftCol} md={leftCol}>
+            Email:
+          </Col>
+          <Col xs={xsRigtCol} md={rigtCol}>
+            {this.props.selectedContact.email}
+          </Col>
+        </Row>
+        <Row>
+          <Col xs={xsLeftCol} md={leftCol}>
+            Address:
+          </Col>
+          <Col xs={xsRigtCol} md={rigtCol}>
+            {this.props.selectedContact.address}
+          </Col>
+        </Row>
       </div>
     )
   }

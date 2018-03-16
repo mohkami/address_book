@@ -55,8 +55,8 @@ class NavBar extends Component {
   render() {
     return (
       <div>
-        <div>
-          This is the Nav Bar
+        <div className="navbar-title">
+          All Contacts
         </div>
         <div>
         <SearchInput throttle={500} className="search-input" onChange={this.searchUpdated} />

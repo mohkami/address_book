@@ -1,0 +1,16 @@
+.edit-button-container {
+  display: flex;
+  justify-content: space-between;
+  justify-content: flex-end;
+  padding: 15px;
+}
+
+.contact-header {
+  padding-bottom: 20px;
+  font-size: 25px;
+  font-weight: bold;
+}
+
+.edit-contact-form {
+  margin-top: 40px;
+}

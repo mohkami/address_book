@@ -9,10 +9,10 @@ class App extends Component {
   render() {
     return (
     <Row className="main-container">
-      <Col className="navbar-col" xs={3} md={3}>
+      <Col className="navbar-col" xs={4} md={4}>
         <Route path="/:id?" component={NavBarComponent}/>
       </Col>
-      <Col className="contact-col" xs={9} md={9}>
+      <Col className="contact-col" xs={8} md={8}>
         <Route path="/:id?" component={MainViewComponent}/>
       </Col>
     </Row>
