@@ -1,33 +1,29 @@
-# Feature Requirements
+## Demo of the project
 
-1. Build an address book using the attached wireframe. All contacts should be
-- listed on the left-hand side,
-- be searchable,
-- and can be toggled to view their full details in the main view.
+![demo](https://im.ezgif.com/tmp/ezgif-1-aa53aba1c6.gif)
 
-2. Contacts should be editable in the main view.
 
-3. I can navigate directly to a contact based on some url (hint! use routing)
+## Initial Load
 
-We are not too concerned about the styling of your address book. Try to make it look as close to the mockup as you can, but no points will be deducted if you cannot have styling match
+![Initial Load](https://image.ibb.co/jju1LH/Screen_Shot_2018_03_16_at_4_23_01_AM.png)
 
-# Technical Requirements
 
-1. Send us a link to your repo to view it. DO NOT create a fork of this repo. Instead, make a copy of it. 
+## Search
 
-2. Please provide unit / integration tests where appropriate
+![search](https://image.ibb.co/dawbnx/Screen_Shot_2018_03_16_at_4_25_26_AM.png)
 
-3. Please use NodeJS + GraphQL as your API, and React+Redux in the frontend.
 
-4. For reference, you can use the contacts.json file in the public folder to get an idea of the data for each contact.
+## Contact Selected
 
-# How we will evaluate
+![contact selected](https://image.ibb.co/nbmbnx/Screen_Shot_2018_03_16_at_4_39_40_AM.png)
 
-1. Quality
-> We will evaluate your code architecture, system architecture, maintainability, and core understanding of the technologies used.
 
-2. Accuracy
-> Tests should be used to PROVE that what you've built is doing what it is meant to do. We will evaluate how you structure your tests, your use of mocks/stubs (if necessary), and your understanding of testing concepts.
+## Edit Mode
 
-3. Speed
-> At Edvisor we live and breathe the TechStars mantra of "do more faster". As such, we care about moving fast. If you are new to these technologies, your speed will show us how quickly you can learn and adapt to changing technologies. If you're not new to these technologies, you will understand that this assignment is fairly basic and shouldn't take too much time to complete.
+![contact selected edit mode](https://image.ibb.co/gBgRnx/Screen_Shot_2018_03_16_at_4_40_34_AM.png)
+
+
+## Error Messages
+
+![error messages](https://image.ibb.co/bXu7uc/Screen_Shot_2018_03_16_at_4_38_32_AM.png)
+
