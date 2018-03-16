@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class NavBar extends Component {
+export class NavBar extends Component {
   constructor (props) {
     super(props)
     this.initializeState()

@@ -115,9 +115,7 @@ class ContactsAPI {
     static getContactById(contactId) {
         const query = ContactsAPI.buildGetContactByIdQuery(contactId)
         return graphQLClient.query(query)
-        .then(data => {
-            return data
-        })
+        .then(data => data)
         .catch(error => console.error(error))
     }
     

@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import {Row, Col} from 'react-bootstrap'
-import {Route} from 'react-router-dom'
+import {Route, withRouter} from 'react-router-dom'
 import NavBarComponent from './navbar/NavBar'
 import MainViewComponent from './main_view/MainView'
 import './App.css'
 
-class App extends Component {
+export class App extends Component {
   render() {
     return (
     <Row className="main-container">
@@ -20,4 +20,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)

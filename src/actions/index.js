@@ -5,7 +5,7 @@ import ContactsAPI from '../api/contacts'
 export function loadAllContacts() {
     return function(dispatch) {
         return ContactsAPI.getAllContacts().then(response => {
-            dispatch(loadContacts(response.data.contacts))
+            dispatch(loadContactsSuccessful(response.data.contacts))
         }).catch(error => {
             throw(error)
         })
@@ -16,7 +16,7 @@ export function loadAllContacts() {
 export function searchContacts(searchTerm='') {
     return function(dispatch) {
         return ContactsAPI.searchContacts(searchTerm).then(response => {
-            dispatch(loadContacts(response.data.contacts))
+            dispatch(loadContactsSuccessful(response.data.contacts))
         }).catch(error => {
             throw(error)
         })
@@ -45,7 +45,7 @@ export function editContact(newContactInfo){
     }
 }
 
-function loadContacts(contacts) {
+export function loadContactsSuccessful(contacts) {
     return {
         type: constants.LOAD_CONTACTS,
         payload: {
@@ -54,7 +54,7 @@ function loadContacts(contacts) {
     }
 }
 
-function loadContact(contact){
+export function loadContact(contact){
     return {
         type: constants.LOAD_CONTACT,
         payload: {
@@ -63,7 +63,7 @@ function loadContact(contact){
     }
 }
 
-function editContactSuccessful(contact) {
+export function editContactSuccessful(contact) {
     return {
         type: constants.EDIT_CONTACT,
         payload: {
