@@ -1,6 +1,6 @@
 ## Demo of the project
 
-![demo](https://im.ezgif.com/tmp/ezgif-1-aa53aba1c6.gif)
+![demo](https://image.ibb.co/fLzfVH/ezgif_com_video_to_gif.gif)
 
 
 ## Initial Load
